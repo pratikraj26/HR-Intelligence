@@ -30,7 +30,7 @@ hri
       name: "Action",
       prop: "_id",
       cellRenderer: function($scope){
-        return '<div><button ng-click="evaluateEmployee($cell)">Evaluate</button></div>';
+        return '<div><button ng-click="evaluateEmployee($cell)">Predict</button></div>';
       }
     }],
     columnMode: 'force',
