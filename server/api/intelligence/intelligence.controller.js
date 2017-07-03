@@ -39,7 +39,7 @@ exports.tarinNetwork = function(req, res) {
     //   })
     // });
 
-    for(var i = 0; i < Intelligences.length; i++){
+    for(var i = 0; i < 2000; i++){
       var intelligence = Intelligences[i];
       trainDataArray.push({
         input: {
@@ -81,11 +81,12 @@ exports.generateResult = function(req, res) {
     var employeeID = Employee._id;
     Intelligence
     .find({
-      employeeID: employeeID
+      'employeeID': employeeID
     })
-    .exec(function (err, intelligenceData) {
+    .exec(function (err, intelligenceResults) {
       if(err) { return handleError(res, err); }
-      if(!intelligenceData) { return res.status(404).send('Not Found'); }
+      if(!intelligenceResults) { return res.status(404).send('Not Found'); }
+      var intelligenceData = intelligenceResults[0];
       var intelligenceInputData = {
         timeSpent: intelligenceData.timeSpent,
         avgMonthlyHour: intelligenceData.avgMonthlyHour,
@@ -99,6 +100,7 @@ exports.generateResult = function(req, res) {
       return res.status(200).json({"output": output});
     });
   });
+
 };
 
 // Creates a new Intelligence in the DB.

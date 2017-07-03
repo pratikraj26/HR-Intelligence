@@ -8,9 +8,9 @@ var auth = require('../../auth/auth.service');
 exports.index = function(req, res) {
   Employee
   .find({
-    active: true
+    sapID: {$gte: 102000}
   })
-  .limit(500)
+  .limit(1000)
   .exec(function (err, Employees) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(Employees);
