@@ -8,6 +8,6 @@ hri
    $location.url('/list/' +$routeParams.token);
  }
  $scope.addEmployee = function() {
-
+ 	$location.url('/addEmployee');
  }
 }]);

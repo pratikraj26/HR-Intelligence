@@ -56,34 +56,75 @@ body {
 	display: flex;
 	height: 100%;
 	font-family: 'Lato', sans-serif;
+	flex-direction: column;
 }
-
+/* nav */
+nav{
+	width: 100%;
+	padding: 15px 10px;
+	background: #525252;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+nav h1{
+	font-size: 26px;
+	text-transform: uppercase;
+	color: #fff;
+	font-weight: 700;
+}
+nav h1 span{
+	font-style: italic;
+	font-size: 12px;
+	letter-spacing: 0.6px;
+}
+nav .user{
+	color: #fff;
+	padding: 0 10px;
+	
+}
+nav .user a{
+	color: #ef4815;
+}
 /* login */
 #main{
 	display: flex;
 	min-height: 100vh;
 	flex: 1;
 }
-#loginContainer{
+#loginContainer, #landingContainer, #addEmpContainer{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex:1;
 }
-#login{
+#addEmp{
+	width:800px;
+	min-height: 200px;
+	background: #fff;
+	border-radius: 3px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#login, #landing{
 	width:400px;
 	min-height: 200px;
 	background: #fff;
 	border-radius: 3px;
-	padding: 15px 10px;
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
-#login h1{
+#login h1, #addEmp h1{
 	font-size: 24px;
 	font-weight: 700;
+	text-align: left;
+	width: 100%;
 }
-#login h1 span{
+#login h1 span, #addEmp h1 span{
 	display: block;
 	font-size: 12px;
 	font-weight: 300;
@@ -101,7 +142,7 @@ body {
 	width: 100%;
 	padding:8px 5px;
 }
-#login .inputBox input[type="button"]{
+#login .inputBox button{
 	background: #ef4815;
 	color: #fff;
 	font-size: 13px;
@@ -109,6 +150,7 @@ body {
 	padding:12px;
 	border-radius: 2px;
 	border:0;
+	width: 100%;
 }
 .dt {
   width: 75%;
@@ -121,20 +163,21 @@ body {
 	flex:1;
 }
 
-.landingButton {
-	background-color: #3b4252;
-	display: inline-block;
+#landing button {
+	background: #ef4815;
+	color: #fff;
+	font-size: 13px;
 	text-transform: uppercase;
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: normal;
-	color: #ffffff;
-	line-height: 1;
-	padding: 10px 15px;
-	margin-right: 10px;
-	box-sizing: border-box;
-	border-radius: 7px;
-	cursor: pointer;
-	background: -webkit-linear-gradient(top, #3b4252, #131926);
-  border: 1px solid #272e3d;
+	padding:12px;
+	border-radius: 2px;
+	border:0;
+	width: 140px;
+	margin:10px 0;
+}
+#landing .addEmp{
+	background: #333;
+}
+
+#landing .train{
+	background: #76d200;
 }
