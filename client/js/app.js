@@ -3,7 +3,8 @@ var hri = angular.module('hri', [
   'data-table'
 ]);
 
-hri.config(function ($routeProvider) {
+hri.config(function ($routeProvider, $compileProvider) {
+  $compileProvider.preAssignBindingsEnabled(true);
   $routeProvider.
   when('/landing/:token', {
     templateUrl: 'views/landing.html',
@@ -20,10 +21,6 @@ hri.config(function ($routeProvider) {
   when('/evaluate/:token', {
     templateUrl: 'views/evaluate.html',
     controller: 'evaluateController'
-  }).
-  when('/addEmployee', {
-    templateUrl: 'views/addEmp.html',
-    controller: 'landingController'
   }).
   otherwise({redirectTo:'/login'});
 })
