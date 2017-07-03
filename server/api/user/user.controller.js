@@ -40,7 +40,7 @@ exports.authenticateUser = function(req, res) {
   }, function(err, User) {    
     if(err) { return handleError(res, err); }
     if(User.length > 0){
-      var token = auth.signToken(user._id, user.role);
+      var token = auth.signToken(User._id, User.role);
       return res.status(200).json({token: token});
     }else{
       return res.status(200).json({'error': 'Authentication failed'});
