@@ -1,73 +1,54 @@
 'use strict';
 
 var _ = require('lodash');
-var User = require('./user.model');
+var Employee = require('./employee.model');
 var auth = require('../../auth/auth.service');
 
-// Get list of Users
+// Get list of Employees
 exports.index = function(req, res) {
-  User.find(function (err, Users) {
+  Employee.find(function (err, Employees) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(Users);
+    return res.status(200).json(Employees);
   });
 };
 
-// Get a single User
+// Get a single Employee
 exports.show = function(req, res) {
-  User.findById(req.params.id, function (err, User) {
+  Employee.findById(req.params.id, function (err, Employee) {
     if(err) { return handleError(res, err); }
-    if(!User) { return res.status(404).send('Not Found'); }
-    return res.json(User);
+    if(!Employee) { return res.status(404).send('Not Found'); }
+    return res.json(Employee);
   });
 };
 
-// Creates a new User in the DB.
+// Creates a new Employee in the DB.
 exports.create = function(req, res) {
-  User.create(req.body, function(err, User) {
+  Employee.create(req.body, function(err, Employee) {
     if(err) { return handleError(res, err); }
-    return res.status(201).json(User);
+    return res.status(201).json(Employee);
   });
 };
 
-// Creates a new User in the DB.
-exports.authenticateUser = function(req, res) {
-  var email = req.body.email;
-  var password = req.body.password;
-
-  User.find({
-    email: email,
-    password: password
-  }, function(err, User) {    
-    if(err) { return handleError(res, err); }
-    if(User.length > 0){
-      var token = auth.signToken(User._id, User.role);
-      return res.status(200).json({token: token});
-    }else{
-      return res.status(200).json({'error': 'Authentication failed'});
-    }
-  });
-};
-
-// Updates an existing User in the DB.
+// Updates an existing Employee in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  User.findById(req.params.id, function (err, User) {
+  Employee.findById(req.params.id, function (err, Employee) {
     if (err) { return handleError(res, err); }
-    if(!User) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(User, req.body);
+    if(!Employee) { return res.status(404).send('Not Found'); }
+    var updated = _.merge(Employee, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.status(200).json(User);
+      return res.status(200).json(Employee);
     });
   });
 };
 
-// Deletes a User from the DB.
+// Deletes a Employee from the DB.
 exports.destroy = function(req, res) {
-  User.findById(req.params.id, function (err, User) {
+  Employee.findById(req.params.id, function (err, Employee) {
     if(err) { return handleError(res, err); }
-    if(!User) { return res.status(404).send('Not Found'); }
-    User.remove(function(err) {
+    if(!Employee) { return res.status(404).send('Not Found'); }
+    Employee.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
