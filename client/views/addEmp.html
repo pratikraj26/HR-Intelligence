@@ -1,5 +1,40 @@
 <div id="addEmpContainer">
 	<div id="addEmp">
 	  	<h1>Add Employee <span>Add a new user</span></h1>
+	  	<div class="row">
+	  		<div class="inputBox">
+	  			<label>First Name</label>
+	  			<input type="text" name="firstName" ng-model="userDetails.name.firstName">
+	  		</div>
+	  		<div class="inputBox">
+	  		<label>Last Name</label>
+	  			<input type="text" name="lastName" ng-model="userDetails.name.lastName">
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="inputBox">
+	  			<label>Email</label>
+	  			<input type="text" name="email" ng-model="userDetails.email">
+	  		</div>
+	  		<div class="inputBox">
+	  		<label>SAP id</label>
+	  			<input type="text" name="sapID" ng-model="userDetails.sapID">
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="inputBox">
+	  			<label>Current Project</label>
+	  			<input type="text" name="currentProject" ng-model="userDetails.currentProject">
+	  		</div>
+	  		<div class="inputBox">
+	  		<label>Salary</label>
+	  			<input type="text" name="salary" ng-model="userDetails.salary">
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="inputBox">
+	  			<button ng-click="addEmp()">Add</button>
+	  		</div>
+	  	</div>
 	 </div>
 </div>

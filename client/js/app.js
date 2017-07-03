@@ -22,5 +22,9 @@ hri.config(function ($routeProvider, $compileProvider) {
     templateUrl: 'views/evaluate.html',
     controller: 'evaluateController'
   }).
+  when('/addEmployee', {
+    templateUrl: 'views/addEmp.html',
+    controller: 'landingController'
+  }).
   otherwise({redirectTo:'/login'});
 })

@@ -1,6 +1,21 @@
 hri
-.controller('landingController', ['$scope', '$location', '$http','$routeParams',
-  function landingController($scope, $location, $http, $routeParams) {
+.controller('landingController', ['$scope', '$location', '$http','$routeParams','$timeout',
+	function landingController($scope, $location, $http, $routeParams, $timeout) {
+		if($routeParams.token == "added"){
+			$scope.added = true;
+			$scope.msg = "Employee added successfully";
+			$scope.class = "success";
+			$timeout(function(){
+				$scope.added = false;
+			},3000)
+		}else if($routeParams.token == "error"){
+			$scope.msg = "Error occured! Please try again";
+			$scope.added = true;
+			$scope.class = "error";
+			$timeout(function(){
+				$scope.added = false;
+			},3000)
+		}
  $scope.trainModel = function() {
    $http.get('/intelligence/train').then(function() {
      console.log("Model Trained");
@@ -14,4 +29,32 @@ hri
  $scope.addEmployee = function() {
  	$location.url('/addEmployee');
  }
+		$scope.userDetails = {
+			name: {
+				firstName: '',
+				lastName: ''
+			},
+			email: '',
+			sapID: '',
+			currentProject: '',
+			salary: ''
+		}
+		$scope.addEmp = function() {
+			console.log($scope);
+			$http.post('/employee', JSON.stringify($scope.userDetails)).then(function(data) {
+				$scope.firstName ='';
+				$scope.lastName='';
+				$scope.email='';
+				$scope.sapID='';
+				$scope.currentProject='';
+				$scope.salary='';
+				$scope.added = true;
+				$location.url('/landing/added');
+				
+				//setTimeout(function(){}, 3000);
+			}, function() {
+				$location.url('/landing/error');
+				console.log("Login failed");
+			});
+		}
 }]);
