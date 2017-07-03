@@ -39,7 +39,7 @@ exports.tarinNetwork = function(req, res) {
     //   })
     // });
 
-    for(var i = 0; i < 10; i++){
+    for(var i = 0; i < Intelligences.length; i++){
       var intelligence = Intelligences[i];
       trainDataArray.push({
         input: {

@@ -7,8 +7,10 @@ var auth = require('../../auth/auth.service');
 // Get list of Employees
 exports.index = function(req, res) {
   Employee
-  .find()
-  .limit(10)
+  .find({
+    active: true
+  })
+  .limit(500)
   .exec(function (err, Employees) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(Employees);
