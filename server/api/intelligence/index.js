@@ -5,8 +5,8 @@ var controller = require('./intelligence.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
-router.post('/', controller.create);
+router.get('/train', controller.tarinNetwork);
+router.get('/generate/:id', controller.generateResult);
 
 // router.put('/:id', controller.update);
 // router.patch('/:id', controller.update);

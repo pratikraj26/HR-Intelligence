@@ -12,7 +12,8 @@ var IntelligenceSchema = new Schema({
   lastEvaluation: {type: Number, required: true},
   satisfactionLevel: {type: Number, required: true},
   salary: {type: Number, required: true},
-  left: {type: Boolean, required: true, default: false}
+  left: {type: Number, required: true, default: 0},
+  addedOn: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Intelligence', IntelligenceSchema);

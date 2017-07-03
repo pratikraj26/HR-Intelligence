@@ -2,22 +2,102 @@
 
 var _ = require('lodash');
 var Intelligence = require('./intelligence.model');
+var Employee = require('../employee/employee.model');
 var auth = require('../../auth/auth.service');
 
 // Get list of Intelligences
-exports.index = function(req, res) {
-  Intelligence.find(function (err, Intelligences) {
+exports.tarinNetwork = function(req, res) {
+  var n = 0;
+  var trainDataArray = [];
+  Intelligence
+  .find()
+  .sort('-addedOn')
+  .populate('employeeID')
+  .exec(function (err, Intelligences) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(Intelligences);
+    // var promiseList = Intelligences.map(function(intelligence, index){
+    //   return new Promise(function(resolve, reject){
+    //     if( n < 10){
+    //       console.log(intelligence.employeeID.sapID);
+    //       trainDataArray.push({
+    //         input: {
+    //           timeSpent: intelligence.timeSpent,
+    //           avgMonthlyHour: intelligence.avgMonthlyHour,
+    //           promotionInFiveYears: intelligence.promotionInFiveYears,
+    //           WorkAccident: intelligence.WorkAccident,
+    //           lastEvaluation: intelligence.lastEvaluation,
+    //           satisfactionLevel: intelligence.satisfactionLevel,
+    //           salary: intelligence.salary,
+    //         },
+    //         output: {
+    //           left: intelligence.left
+    //         }
+    //       });
+    //       n++;
+    //       resolve();
+    //     }
+    //   })
+    // });
+
+    for(var i = 0; i < 10; i++){
+      var intelligence = Intelligences[i];
+      trainDataArray.push({
+        input: {
+          timeSpent: intelligence.timeSpent,
+          avgMonthlyHour: intelligence.avgMonthlyHour,
+          promotionInFiveYears: intelligence.promotionInFiveYears,
+          WorkAccident: intelligence.WorkAccident,
+          lastEvaluation: intelligence.lastEvaluation,
+          satisfactionLevel: intelligence.satisfactionLevel,
+          salary: intelligence.salary,
+        },
+        output: {
+          left: intelligence.left
+        }
+      });
+    }
+
+    var promise = new Promise(function(resolve, reject){
+      var train = net.train(trainDataArray);
+      resolve({"trained": true});
+    })
+
+    promise
+    .then(function(data){
+      return res.status(200).json({"response": "System has been trained successfully"});
+    })
+    .catch(function(err){
+      return handleError(res, err);
+    })
+    // return res.status(200).json(Intelligences);
   });
 };
 
 // Get a single Intelligence
-exports.show = function(req, res) {
-  Intelligence.findById(req.params.id, function (err, Intelligence) {
+exports.generateResult = function(req, res) {
+  Employee.findById(req.params.id, function (err, Employee) {
     if(err) { return handleError(res, err); }
-    if(!Intelligence) { return res.status(404).send('Not Found'); }
-    return res.json(Intelligence);
+    if(!Employee) { return res.status(404).send('Not Found'); }
+    var employeeID = Employee._id;
+    Intelligence
+    .find({
+      employeeID: employeeID
+    })
+    .exec(function (err, intelligenceData) {
+      if(err) { return handleError(res, err); }
+      if(!intelligenceData) { return res.status(404).send('Not Found'); }
+      var intelligenceInputData = {
+        timeSpent: intelligenceData.timeSpent,
+        avgMonthlyHour: intelligenceData.avgMonthlyHour,
+        promotionInFiveYears: intelligenceData.promotionInFiveYears,
+        WorkAccident: intelligenceData.WorkAccident,
+        lastEvaluation: intelligenceData.lastEvaluation,
+        satisfactionLevel: intelligenceData.satisfactionLevel,
+        salary: intelligenceData.salary,
+      }
+      var output = net.run(intelligenceInputData);
+      return res.status(200).json({"output": output});
+    });
   });
 };
 

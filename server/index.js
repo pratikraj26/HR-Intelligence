@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var brain = require('brain');
-var net = new brain.NeuralNetwork();
+global.net = new brain.NeuralNetwork();
 
 mongoose.connect('mongodb://localhost/hridb', {
   db: {
