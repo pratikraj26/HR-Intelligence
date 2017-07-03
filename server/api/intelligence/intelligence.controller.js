@@ -1,46 +1,46 @@
 'use strict';
 
 var _ = require('lodash');
-var User = require('./user.model');
+var Intelligence = require('./intelligence.model');
 var auth = require('../../auth/auth.service');
 
-// Get list of Users
+// Get list of Intelligences
 exports.index = function(req, res) {
-  User.find(function (err, Users) {
+  Intelligence.find(function (err, Intelligences) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(Users);
+    return res.status(200).json(Intelligences);
   });
 };
 
-// Get a single User
+// Get a single Intelligence
 exports.show = function(req, res) {
-  User.findById(req.params.id, function (err, User) {
+  Intelligence.findById(req.params.id, function (err, Intelligence) {
     if(err) { return handleError(res, err); }
-    if(!User) { return res.status(404).send('Not Found'); }
-    return res.json(User);
+    if(!Intelligence) { return res.status(404).send('Not Found'); }
+    return res.json(Intelligence);
   });
 };
 
-// Creates a new User in the DB.
+// Creates a new Intelligence in the DB.
 exports.create = function(req, res) {
-  User.create(req.body, function(err, User) {
+  Intelligence.create(req.body, function(err, Intelligence) {
     if(err) { return handleError(res, err); }
-    return res.status(201).json(User);
+    return res.status(201).json(Intelligence);
   });
 };
 
-// Creates a new User in the DB.
-exports.authenticateUser = function(req, res) {
+// Creates a new Intelligence in the DB.
+exports.authenticateIntelligence = function(req, res) {
   var email = req.body.email;
   var password = req.body.password;
 
-  User.find({
+  Intelligence.find({
     email: email,
     password: password
-  }, function(err, User) {    
+  }, function(err, Intelligence) {    
     if(err) { return handleError(res, err); }
-    if(User.length > 0){
-      var token = auth.signToken(User._id, User.role);
+    if(Intelligence.length > 0){
+      var token = auth.signToken(Intelligence._id, Intelligence.role);
       return res.status(200).json({token: token});
     }else{
       return res.status(200).json({'error': 'Authentication failed'});
@@ -48,26 +48,26 @@ exports.authenticateUser = function(req, res) {
   });
 };
 
-// Updates an existing User in the DB.
+// Updates an existing Intelligence in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  User.findById(req.params.id, function (err, User) {
+  Intelligence.findById(req.params.id, function (err, Intelligence) {
     if (err) { return handleError(res, err); }
-    if(!User) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(User, req.body);
+    if(!Intelligence) { return res.status(404).send('Not Found'); }
+    var updated = _.merge(Intelligence, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.status(200).json(User);
+      return res.status(200).json(Intelligence);
     });
   });
 };
 
-// Deletes a User from the DB.
+// Deletes a Intelligence from the DB.
 exports.destroy = function(req, res) {
-  User.findById(req.params.id, function (err, User) {
+  Intelligence.findById(req.params.id, function (err, Intelligence) {
     if(err) { return handleError(res, err); }
-    if(!User) { return res.status(404).send('Not Found'); }
-    User.remove(function(err) {
+    if(!Intelligence) { return res.status(404).send('Not Found'); }
+    Intelligence.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });

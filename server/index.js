@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var brain = require('brain');
+var net = new brain.NeuralNetwork();
 
 mongoose.connect('mongodb://localhost/hridb', {
   db: {
@@ -15,26 +17,7 @@ mongoose.connection.on('error', function(err) {
   }
 );
 
-// if (url == null && process.env.DATABASE_SERVICE_NAME) {
-//   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-//       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-//       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-//       mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-//       mongoPassword = process.env[mongoServiceName + '_PASSWORD'],
-//       mongoUser = process.env[mongoServiceName + '_USER'];
-
-//   if (mongoHost && mongoPort && mongoDatabase) {
-//     mongoURLLabel = url = 'mongodb://';
-//     if (mongoUser && mongoPassword) {
-//       url += mongoUser + ':' + mongoPassword + '@';
-//     }
-//     // Provide UI label that excludes user id and pw
-//     mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-//     url += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
-//   }
-// } else {
-//   url = 'mongodb://localhost/hridb';
-// }
+require('./seed');
 
 app.use(bodyParser.json());
 

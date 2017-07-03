@@ -8,6 +8,7 @@ var IntelligenceSchema = new Schema({
   timeSpent: {type: Number, required: true},
   avgMonthlyHour: {type: Number, required: true},
   promotionInFiveYears: {type: Number, required: true},
+  WorkAccident: {type: Number, required: true, default: 0},
   lastEvaluation: {type: Number, required: true},
   satisfactionLevel: {type: Number, required: true},
   salary: {type: Number, required: true},
