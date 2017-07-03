@@ -4,11 +4,11 @@ var hri = angular.module('hri', [
 
 hri.config(function ($routeProvider) {
   $routeProvider.
-  when('/landing', {
+  when('/landing/:token', {
     templateUrl: 'views/landing.html',
     controller: 'landingController'
   }).
-  when('/list', {
+  when('/list/:token', {
     templateUrl: 'views/list.html',
     controller: 'listController'
   }).
@@ -16,7 +16,7 @@ hri.config(function ($routeProvider) {
     templateUrl: 'views/login.html',
     controller: 'loginController'
   }).
-  when('/evaluate', {
+  when('/evaluate/:token', {
     templateUrl: 'views/evaluate.html',
     controller: 'evaluateController'
   }).
