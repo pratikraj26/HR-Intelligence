@@ -1,5 +1,6 @@
 var hri = angular.module('hri', [
-  'ngRoute'
+  'ngRoute',
+  'data-table'
 ]);
 
 hri.config(function ($routeProvider) {
