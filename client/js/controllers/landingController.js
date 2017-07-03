@@ -1,10 +1,11 @@
 hri
-.controller('landingController', ['$scope', '$location', '$http',function landingController($scope, $location, $http) {
+.controller('landingController', ['$scope', '$location', '$http','$routeParams',
+  function landingController($scope, $location, $http, $routeParams) {
  $scope.trainModel = function() {
 
  }
  $scope.evaluateModel = function() {
-   $location.url('/list');
+   $location.url('/list/' +$routeParams.token);
  }
  $scope.addEmployee = function() {
 

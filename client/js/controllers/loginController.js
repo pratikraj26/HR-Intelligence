@@ -4,9 +4,10 @@ hri.controller('loginController', ['$scope', '$location', '$http',function login
     password: ""
   }
   $scope.onLogin = function(user) {
-    $http.post('/login', JSON.stringify(user)).then(function(data) {
-      var token = data.token;
-      $location.url('/landing/:token');
+    $http.post('/user/auth', JSON.stringify(user)).then(function(data) {
+      var token = data.data.token;
+      console.log(data);
+      $location.url('/landing/'+token);
     }, function() {
       $location.url('/landing/54');
       console.log("Login failed");
