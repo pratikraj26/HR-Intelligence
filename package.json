@@ -1,0 +1,27 @@
+{
+  "name": "hr-intelligence",
+  "version": "1.0.0",
+  "description": "HRI is an AI prototype for HR department of a company that allows HR to predict an employee’s attrition/retention.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratikraj-mob-incedo/HR-Intelligence.git"
+  },
+  "author": "The Concept Crew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pratikraj-mob-incedo/HR-Intelligence/issues"
+  },
+  "homepage": "https://github.com/pratikraj-mob-incedo/HR-Intelligence#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "~4.0.3"
+  }
+}
