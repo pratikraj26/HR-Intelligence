@@ -40,9 +40,13 @@ hri
     }
    };
 
+   $scope.popupHide = function(){
+    $scope.prePop = false;
+   }
    $scope.evaluateEmployee = function(id) {
      $http.get('/intelligence/generate/'+id).then(function(data) {
-       console.log(parseFloat(data.data.output.left) * 100);
+      $scope.prePop = true;
+       $scope.prediction = ((data.data.output.left)*100).toFixed(2) +'%';
      })
    }
 
@@ -63,5 +67,7 @@ hri
      });
    }, 200)
    };
+
+
 
 }]);

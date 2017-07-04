@@ -1,1 +1,8 @@
 <dtable options="options" rows="data" class="material" on-page="paging(offset, size)"></dtable>
+<div class="overlay" ng-show='prePop'>
+	<div class="popup">
+	<div class="closeX" ng-click="popupHide()">X</div>
+	<h2>Attrition Rate</h2>
+		<div class="prediction">{{prediction}}</div>
+	</div>
+</div>

@@ -1,7 +1,7 @@
 <div class="buttonContainer">
 <div ng-show="added" class="msg {{class}}">{{msg}}</div>
 	<div id="landing">
-	  <button class="landingButton train" ng-click="trainModel()">Train</button>
+	  <button class="landingButton train" ng-class="loader ? 'loader' : ''" ng-click="trainModel()">{{btnText}}</button>
 	  <button class="landingButton" ng-click="evaluateModel()">Initiate</button>
 	  <button class="landingButton addEmp" ng-click="addEmployee()">Add Employee</button>
 	 </div>

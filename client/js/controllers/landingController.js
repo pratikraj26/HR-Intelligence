@@ -16,10 +16,17 @@ hri
 				$scope.added = false;
 			},3000)
 		}
+		$scope.btnText = "Train";
  $scope.trainModel = function() {
+ 	$scope.loader = true;
+ 	$scope.btnText = "Processing";
    $http.get('/intelligence/train').then(function() {
+   	$scope.loader = false;
+   	$scope.btnText = "Train";
      console.log("Model Trained");
    }, function() {
+   	$scope.btnText = "Train";
+   	$scope.loader = false;
      console.log("Model Training Failed");
    })
  }
